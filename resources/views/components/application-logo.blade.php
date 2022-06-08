@@ -1,0 +1,1 @@
+<h2 class="text-xl font-black">Smart Station</h2>
