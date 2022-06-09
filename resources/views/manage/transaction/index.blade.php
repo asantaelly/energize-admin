@@ -1,54 +1,13 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 sm:px-1 gap-4 items-center justify-evenly">
-                <div class="bg-gray-900 p-5 h-40 w-30 gap-y-5  rounded-lg">
-
-                    <div class="flex">
-                        <h1 class="text-lg text-white font-black">
-                            <a class="hover:text-orange-500" href="#">
-                                Petrol
-                            </a>
-                        </h1>
-                    </div>
-                    <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS 2,994 /=</span></div>
-                    
-                        <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                            <div>available</div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="bg-gray-900 p-5 h-40 w-30 gap-y-5  rounded-lg">
-
-                    <div class="flex">
-                        <h1 class="text-lg text-white font-black">Diesel</h1>
-                    </div>
-                    <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS 3,103 /=</span></div>
-                    
-                        <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                            <div>available</div>
-                        </div>
-
-                    </div>
-                </div> 
-            </div>
-
-            <div class="flex-row py-5">
+            <div class="flex-row">
 
                 
                 <div class="flex py-5">
-                    <h2 class="text-lg font-bold">Transactions</h2>
+                    <h2 class="text-lg font-bold">Transaction Management</h2>
                 </div>
 
                 <div class="w-full overflow-auto rounded-lg shadow">
@@ -68,7 +27,7 @@
                         <tbody class="bg-white divide-y divide-gray-300">
                           <tr>
                             <td class="p-3 text-sm text-gray-700">
-                                <a class="hover:underline hover:text-blue-800" href="#">
+                                <a class="hover:underline hover:text-blue-800" href="{{ route('transaction.show', ['id' => 1])}}">
                                     0001
                                 </a>
                             </td>
