@@ -6,12 +6,14 @@
             <div class="flex-row">
 
                 
-                <div class="flex py-5">
+                <div class="flex items-center justify-between py-5">
                     <div>
                         <h2 class="text-lg font-bold">Fuel Management</h2>
                     </div>
 
-                    
+                    <div>
+                        <a href="{{ route('fuel.create')}}" class="px-5 py-2 bg-indigo-500 rounded-lg shadow-lg">Register Fuel</a>
+                    </div>  
                 </div>
 
                 <div class="w-full overflow-auto rounded-lg shadow">

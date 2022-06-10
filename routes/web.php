@@ -29,13 +29,19 @@ Route::middleware(['auth'])->group(function() {
         return view('manage.fuel.index');
     })->name('fuel');
 
+    Route::get('/fuel/create', function() {
+        return view('manage.fuel.create');
+    })->middleware('role.admin')->name('fuel.create');
+
     Route::get('/fuel/{id}', function() {
         return view('manage.fuel.show');
-    })->name('fuel.show');
+    })->middleware('role.admin')->name('fuel.show');
 
     Route::get('/fuel/edit/{id}', function() {
         return view('manage.fuel.edit');
-    })->name('fuel.edit');
+    })->middleware('role.admin')->name('fuel.edit');
+
+   
 
 
     // Transaction Management
@@ -45,7 +51,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/transactions/{id}', function() {
         return view('manage.transaction.show');
-    })->name('transaction.show');
+    })->middleware('role.admin')->name('transaction.show');
 
 });
 
