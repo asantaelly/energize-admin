@@ -12,7 +12,7 @@
 
             <div class="flex flex-row items-center justify-center py-5">
 
-                <div class="rounded-lg bg-white p-5 w-1/2">
+                <div class="rounded-lg bg-white p-5 w-full sm:w-1/2">
 
                     <div class="flex flex-row items-center justify-between px-5 mb-3">
 
