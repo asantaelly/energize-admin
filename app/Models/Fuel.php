@@ -9,6 +9,13 @@ class Fuel extends Model
 {
     use HasFactory;
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
 
      /**
      * The attributes that are mass assignable.
@@ -18,7 +25,7 @@ class Fuel extends Model
     protected $fillable = [
         'name',
         'price',
-        'amount',
+        'total_litres',
         'status',
     ];
 

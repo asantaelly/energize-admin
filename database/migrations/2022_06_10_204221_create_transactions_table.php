@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('fuel_id')->constrained()->onDelete('cascade');
             $table->foreignId('price_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unsignedDecimal('payment', $precision = 8, $scale = 2);
             $table->unsignedDecimal('litres', $precision = 8, $scale = 2);
             $table->boolean('status')->nullable(); // NULL = Processing, 0 = Rejected, 1 = Approved.

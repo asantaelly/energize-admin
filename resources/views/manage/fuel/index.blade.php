@@ -12,7 +12,7 @@
                     </div>
 
                     <div>
-                        <a href="{{ route('fuel.create')}}" class="px-5 py-2 bg-indigo-500 rounded-lg shadow-lg">Register Fuel</a>
+                        <a href="{{ route('fuel.create')}}" class="px-5 py-2 bg-indigo-500 rounded-lg shadow-lg text-white">Register Fuel</a>
                     </div>  
                 </div>
 
@@ -29,33 +29,26 @@
                         </thead>
 
                         <tbody class="bg-white divide-y divide-gray-300">
-                          <tr>
-                            <td class="p-3 text-sm text-gray-700">
-                                <a class="hover:underline hover:text-blue-800" href="{{ route('fuel.show', ['id' => 1])}}">
-                                    0001
-                                </a>
-                            </td>
-                            <td class="p-3 text-sm text-gray-700">Petrol</td>
-                            <td class="p-3 text-sm text-gray-700">2.994</td>
-                            <td class="p-3 text-sm text-gray-700">15,238</td>
-                            <td class="p-3 text-sm text-gray-700">
-                                <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Available</span>
-                            </td>
-                          </tr>
 
-                          <tr>
-                            <td class="p-3 text-sm text-gray-700">
-                                <a class="hover:underline hover:text-blue-800" href="#">
-                                    0002
-                                </a>
-                            </td>
-                            <td class="p-3 text-sm text-gray-700">Diesel</td>
-                            <td class="p-3 text-sm text-gray-700">3,120</td>
-                            <td class="p-3 text-sm text-gray-700">15</td>
-                            <td class="p-3 text-sm text-gray-700">
-                                <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Unavailable</span>
-                            </td>
-                          </tr>
+                            @foreach ($fuels as $fuel)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-3 text-sm text-gray-700">
+                                        <a class="hover:text-blue-500 hover:font-bold" href="{{ route('fuel.show', ['fuel' => $fuel])}}">
+                                            000{{ $fuel->id}}
+                                        </a>
+                                    </td>
+                                    <td class="p-3 text-sm text-gray-700">{{ ucfirst($fuel->name)}}</td>
+                                    <td class="p-3 text-sm text-gray-700">{{ $fuel->price}}</td>
+                                    <td class="p-3 text-sm text-gray-700">{{ $fuel->total_litres}}</td>
+                                    <td class="p-3 text-sm text-gray-700">
+                                        @if ($fuel->status == TRUE)
+                                            <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Available</span>
+                                        @else
+                                            <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Unavailable</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
                       </table>

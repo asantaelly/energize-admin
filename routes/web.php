@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FuelController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,30 +19,15 @@ Route::get('/', function () {
 });
 
 
+Route::resource('fuel', FuelController::class);
 
 Route::middleware(['auth'])->group(function() {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
-    Route::get('/fuel', function() {
-        return view('manage.fuel.index');
-    })->name('fuel');
-
-    Route::get('/fuel/create', function() {
-        return view('manage.fuel.create');
-    })->middleware('role.admin')->name('fuel.create');
-
-    Route::get('/fuel/{id}', function() {
-        return view('manage.fuel.show');
-    })->middleware('role.admin')->name('fuel.show');
-
-    Route::get('/fuel/edit/{id}', function() {
-        return view('manage.fuel.edit');
-    })->middleware('role.admin')->name('fuel.edit');
-
-   
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
 
     // Transaction Management

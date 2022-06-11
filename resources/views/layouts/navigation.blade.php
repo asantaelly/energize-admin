@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('fuel')" :active="request()->routeIs(['fuel', 'fuel.edit', 'fuel.create', 'fuel.show'])">
+                    <x-nav-link :href="route('fuel.index')" :active="request()->routeIs(['fuel.index', 'fuel.edit', 'fuel.create', 'fuel.show'])">
                         {{ __('Fuel Management') }}
                     </x-nav-link>
                 </div>
@@ -79,7 +79,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('fuel')" :active="request()->routeIs(['fuel', 'fuel.edit', 'fuel.create', 'fuel.show'])">
+            <x-responsive-nav-link :href="route('fuel.index')" :active="request()->routeIs(['fuel.index', 'fuel.edit', 'fuel.create', 'fuel.show'])">
                 {{ __('Fuel Management') }}
             </x-responsive-nav-link>
 

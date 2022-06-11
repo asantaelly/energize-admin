@@ -14,16 +14,23 @@
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
                             <a class="hover:text-orange-500" href="#">
-                                Petrol
+                                {{ ucfirst($petrol->name)}}
                             </a>
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS 2,994 /=</span></div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $petrol->price }} /=</span></div>
                     
-                        <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                            <div>available</div>
-                        </div>
+                        @if ($petrol->status == TRUE)
+                            <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
+                                <h4 class="text-sm px-2">available</h4>
+                            </div>
+                        @else
+                            <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
+                                <h4 class="text-sm px-2">Unavailable</h4>
+                            </div>
+                        @endif
+                        
 
                     </div>
                 </div>
@@ -31,14 +38,22 @@
                 <div class="bg-gray-900 p-5 h-40 w-30 gap-y-5  rounded-lg">
 
                     <div class="flex">
-                        <h1 class="text-lg text-white font-black">Diesel</h1>
+                        <h1 class="text-lg text-white font-black">
+                            {{ ucfirst($diesel->name)}}
+                        </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS 3,103 /=</span></div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $diesel->price }} /=</span></div>
                     
-                        <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                            <div>available</div>
-                        </div>
+                        @if ($diesel->status == TRUE)
+                            <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
+                                <h4 class="text-sm px-2">available</h4>
+                            </div>
+                        @else
+                            <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
+                                <h4 class="text-sm px-2">Unavailable</h4>
+                            </div>
+                        @endif
 
                     </div>
                 </div> 

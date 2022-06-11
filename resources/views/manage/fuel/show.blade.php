@@ -14,7 +14,7 @@
                 </div>
 
                 <div>
-                    <a href="{{ route('fuel.edit', ['id' => 1])}}" class="px-5 py-2 bg-indigo-500 rounded-lg shadow-lg">Edit Fuel</a>
+                    <a href="{{ route('fuel.edit', ['fuel' => $fuel])}}" class="px-5 py-2 bg-indigo-500 rounded-lg shadow-lg text-white">Edit Fuel</a>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
 
                         <div>
                             <h2>
-                                00001
+                                000{{ $fuel->id}}
                             </h2>
                         </div>
 
@@ -48,7 +48,7 @@
 
                         <div>
                             <h2>
-                                Petrol
+                                {{ ucfirst($fuel->name)}}
                             </h2>
                         </div>
 
@@ -64,7 +64,7 @@
 
                         <div>
                             <h2>
-                                2,994/=
+                                {{ $fuel->price}}
                             </h2>
                         </div>
 
@@ -82,7 +82,7 @@
 
                         <div>
                             <h2>
-                                15,238
+                                {{ $fuel->total_litres }}
                             </h2>
                         </div>
 
@@ -100,7 +100,12 @@
 
                         <div>
                             <h2>
-                                <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Available</span>
+
+                                @if ($fuel->status == TRUE)
+                                    <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Available</span>
+                                @else
+                                    <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Unavailable</span>
+                                @endif
                             </h2>
                         </div>
 
