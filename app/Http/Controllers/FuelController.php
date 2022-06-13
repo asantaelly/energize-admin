@@ -24,10 +24,20 @@ class FuelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $fuels =  Fuel::all();
+
+        if($request->is('api/*')) {
+
+            return response()->json([
+                'fuels' => $fuels
+            ]);
+        } 
+
         return view('manage.fuel.index', [
-            'fuels' => Fuel::all()
+            'fuels' => $fuels
         ]);
     }
 
@@ -64,6 +74,15 @@ class FuelController extends Controller
             'status' => $validated['status'],
         ]);
 
+        if($request->is('api/*')) {
+
+            return response()->json([
+                'Message' => 'Fuel created Successfully',
+                'fuel' => $fuel,
+                'status' => TRUE
+            ]);
+        }
+
         return redirect()->route('fuel.show', ['fuel', $fuel]);
     }
 
@@ -73,10 +92,19 @@ class FuelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $fuel = Fuel::findOrFail($id);
+
+        if($request->is('api/*')) {
+
+            return response()->json([
+                'fuel' => $fuel
+            ]);
+        }
+
         return view('manage.fuel.show', [
-            'fuel' => Fuel::findOrFail($id)
+            'fuel' => $fuel
         ]);
     }
 
@@ -110,6 +138,15 @@ class FuelController extends Controller
         $fuel->total_litres = $validated['total_litres'];
         $fuel->status = $validated['status'];
         $fuel->save();
+
+        if($request->is('api/*')) {
+            
+            return response()->json([
+                'Message' => 'Fuel Updated Successfully',
+                'fuel' => $fuel,
+                'status' => TRUE
+            ]);
+        }
 
         return redirect()->route('fuel.index');
     }

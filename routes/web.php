@@ -23,12 +23,7 @@ Route::resource('fuel', FuelController::class);
 
 Route::middleware(['auth'])->group(function() {
 
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
-
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
 
     // Transaction Management
     Route::get('/transactions', function() {
