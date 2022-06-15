@@ -43,8 +43,8 @@ class UserController extends Controller
     {
 
         $validated = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string'
+            'email' => ['required', 'string', 'email:rfc,dns'],
+            'password' => ['required', 'string', 'min:8']
         ]);
 
         // Check email
@@ -52,13 +52,10 @@ class UserController extends Controller
 
         // Check password
         if(!$user || !Hash::check($validated['password'], $user->password)) {
-            return response([
-                'status' => FALSE,
-                'message' => 'Invalid credentials.'
-            ], 401);
+            return response(['errors' => ["message" => ["Email address or Password is invalid!"]]], 422);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('APP_TOKEN')->plainTextToken;
 
         $response = [
             'status' => TRUE,
