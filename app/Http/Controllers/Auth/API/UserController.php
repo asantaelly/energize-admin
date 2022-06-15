@@ -53,6 +53,7 @@ class UserController extends Controller
         // Check password
         if(!$user || !Hash::check($validated['password'], $user->password)) {
             return response([
+                'status' => FALSE,
                 'message' => 'Invalid credentials.'
             ], 401);
         }
@@ -60,6 +61,7 @@ class UserController extends Controller
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
+            'status' => TRUE,
             'user' => $user,
             'token' => $token
         ];
