@@ -18,8 +18,8 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed'],
+            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
         $user = User::create([
@@ -58,7 +58,6 @@ class UserController extends Controller
         $token = $user->createToken('APP_TOKEN')->plainTextToken;
 
         $response = [
-            'status' => TRUE,
             'user' => $user,
             'token' => $token
         ];
