@@ -25,6 +25,8 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/fuel/{id}', [FuelController::class, 'show']);
     Route::post('/fuel', [FuelController::class, 'store']);
     Route::put('/fuel/{id}', [FuelController::class, 'update']);
+    Route::get('/fuel/get/{name}', [FuelController::class, 'getFuel']);
+
 
     Route::post('/logout', [UserController::class, 'logout']);
 });

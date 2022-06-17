@@ -31,14 +31,25 @@ class FuelController extends Controller
 
         if($request->is('api/*')) {
 
-            return response()->json([
-                'fuels' => $fuels
-            ]);
+            return response($fuels, 200);
         } 
 
         return view('manage.fuel.index', [
             'fuels' => $fuels
         ]);
+    }
+
+
+
+    public function getFuel($name) {
+
+        $fuel = Fuel::where('name', $name)->first();
+
+        if(!$fuel) {
+            return response(['errors' => ["message" => ["Request resource can not be located, Contact Admin!"]]], 422);
+        }
+
+        return response($fuel, 200);
     }
 
     /**
