@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FuelController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\API\UserController;
 
 /*
@@ -31,6 +32,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::post('/logout', [UserController::class, 'logout']);
 });
 
+
+// payment gateway testing
+Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
 
 
 
