@@ -19,11 +19,12 @@ Route::get('/', function () {
 });
 
 
-Route::resource('fuel', FuelController::class);
 
 Route::middleware(['auth'])->group(function() {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::resource('fuel', FuelController::class);
 
     // Transaction Management
     Route::get('/transactions', function() {

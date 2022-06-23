@@ -11,6 +11,8 @@ class PaymentController extends Controller
 {
     
     /**
+     *  AIRTEL MONEY
+     * 
      *  Get payment USSDPush request and process it.
      *  
      */
@@ -36,6 +38,12 @@ class PaymentController extends Controller
     }
 
 
+     /**
+     *  Vodacom MPESA
+     * 
+     *  Get payment USSDPush request and process it.
+     *  
+     */
     public function getUSSDPush(Request $request)
     {
 

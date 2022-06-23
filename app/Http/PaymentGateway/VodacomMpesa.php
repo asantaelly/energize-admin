@@ -10,9 +10,15 @@ use phpseclib3\Crypt\PublicKeyLoader;
 
 class VodacomMpesa {
 
-    public string $URL = 'https://openapi.m-pesa.com/sandbox/ipg/v2/vodacomTZN/';
+    protected string $URL;
 
-    public string $sessionKey;
+    protected string $sessionKey;
+
+
+    public function __construct()
+    {
+        $this->URL = env('MPESA_API_URL');
+    }
 
 
 
@@ -53,8 +59,9 @@ class VodacomMpesa {
         $response = Http::withHeaders($this->headers())
             ->post($this->URL.'c2bPayment/singleStage/', $validatedData);
 
-        if($response->failed())
+        if($response->failed() || $response->clientError() || $response->serverError()){
             $response->throw();
+        }
 
         return $response;
     }
@@ -106,7 +113,6 @@ class VodacomMpesa {
         return [
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer '. $this->encryptSessionKey($this->sessionKey),
-            'Host' => env('MPESA_PUBLIC_KEY'),
             'Origin' => '*',
         ];
     }
@@ -117,16 +123,11 @@ class VodacomMpesa {
         $apiKey = env('MPESA_API_KEY');
         $publicKey = PublicKeyLoader::load(env('MPESA_API_PUBLIC_KEY'));
 
-        // return print_r(env('MPESA_API_PUBLIC_KEY'));
-
         if(!$publicKey)
             return "Error Loading Public Key";
 
         if(! openssl_public_encrypt($apiKey, $encryptedAPIKey, $publicKey))
             return "Error encrypting API key";
-
-
-        // return print_r(base64_encode($encryptedAPIKey));
 
         return base64_encode($encryptedAPIKey);
     }
@@ -134,7 +135,6 @@ class VodacomMpesa {
 
     public function encryptSessionKey(string $sessionKey) {
 
-        // $apiKey = env('MPESA_API_KEY');
         $publicKey = PublicKeyLoader::load(env('MPESA_API_PUBLIC_KEY'));
 
         if(!$publicKey)

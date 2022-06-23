@@ -94,7 +94,7 @@ class FuelController extends Controller
             ]);
         }
 
-        return redirect()->route('fuel.show', ['fuel', $fuel]);
+        return redirect()->route('fuel.index');
     }
 
     /**

@@ -14,22 +14,29 @@
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
                             <a class="hover:text-orange-500" href="#">
-                                {{ ucfirst($petrol->name)}}
+                                 {{ $petrol ? ucfirst($petrol->name) : 'Petrol'}}
                             </a>
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $petrol->price }} /=</span></div>
-                    
-                        @if ($petrol->status == TRUE)
-                            <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                                <h4 class="text-sm px-2">available</h4>
-                            </div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $petrol ? $petrol->price : '3,000' }}/=</span></div>
+
+                        @if ($petrol)
+                            @if ($petrol->status == TRUE)
+                                <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
+                                    <h4 class="text-sm px-2">available</h4>
+                                </div>
+                            @else
+                                <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
+                                    <h4 class="text-sm px-2">Unavailable</h4>
+                                </div>
+                            @endif  
                         @else
                             <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
                                 <h4 class="text-sm px-2">Unavailable</h4>
                             </div>
                         @endif
+                           
                         
 
                     </div>
@@ -39,21 +46,29 @@
 
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
-                            {{ ucfirst($diesel->name)}}
+                            
+                             {{ $diesel ? ucfirst($diesel->name) : 'Diesel'}} 
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $diesel->price }} /=</span></div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $diesel ?  $diesel->price : '2,700' }}/=</span></div>
                     
-                        @if ($diesel->status == TRUE)
-                            <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                                <h4 class="text-sm px-2">available</h4>
-                            </div>
+                        @if ($diesel)  
+                            @if ($diesel->status == TRUE)
+                                <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
+                                    <h4 class="text-sm px-2">available</h4>
+                                </div>
+                            @else
+                                <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
+                                    <h4 class="text-sm px-2">Unavailable</h4>
+                                </div>
+                            @endif
                         @else
                             <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
                                 <h4 class="text-sm px-2">Unavailable</h4>
                             </div>
                         @endif
+                            
 
                     </div>
                 </div> 
