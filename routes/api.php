@@ -28,13 +28,15 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::put('/fuel/{id}', [FuelController::class, 'update']);
     Route::get('/fuel/get/{name}', [FuelController::class, 'getFuel']);
 
+    Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
+
 
     Route::post('/logout', [UserController::class, 'logout']);
 });
 
 
 // payment gateway testing
-Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
+Route::post('/payment', [PaymentController::class, 'processPayment']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -69,4 +69,26 @@ class PaymentController extends Controller
         
         return $response;
     }
+
+
+
+    public function processPayment(Request $request) {
+
+        $request->validate([
+
+        ]);
+
+        $data = [
+            'Amount' => $request->amount,
+            'Fuel amount' => $request->fuelAmount,
+            'Fue Type' => $request->fuelName,
+            'User' => $request->user,
+            'Phonenumber' => $request->phoneNumber
+        ];
+
+        return [
+            'data' => $data,
+            'message' => 'Request received successfully'
+        ];
+    }
 }
