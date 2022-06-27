@@ -13,9 +13,15 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = Transaction::all();
+
+        if($request->user()->hasRole('admin')) {
+            $transactions = Transaction::all();
+        } else {
+            $transactions = Transaction::where('user_id', $request->user()->id)->get();
+        }
+
         return view('manage.transaction.index', ['transactions' => $transactions]);
     }
 

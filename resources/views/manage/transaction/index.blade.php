@@ -27,11 +27,6 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
 
-                            {{-- @php
-                                dd($transactions->isEmpty())
-                            @endphp --}}
-                          
-
                             @if ($transactions->isEmpty())
                                 <tr>
                                     <td class="p-3 text-md font-semibold text-gray-700 text-center" colspan="8">No transactions were made!</td>
