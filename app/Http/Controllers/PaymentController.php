@@ -5,10 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\PaymentGateway\AirtelMoney;
 use App\Http\PaymentGateway\VodacomMpesa;
+use App\Models\Fuel;
+use App\Models\User;
+use App\Models\Transaction;
+
+
 
 
 class PaymentController extends Controller
 {
+
+    public function processPayment(Request $request) {
+
+        $user = User::find($request->user['user']['id']);
+        $fuel = Fuel::find($request->data['fuel']['id']);
+
+
+        // Generate access token
+        $access_token = random_int(1111, 9999);
+
+        // store transactions details
+        $transaction = Transaction::create([
+            'user_id' => $user->id,
+            'fuel_id' => $fuel->id,
+            'price' => $fuel->price,
+            'cash_paid' => $request->data['amount'],
+            'litres' => round($request->data['fuelAmount'], 2),
+            'phone_number' => $request->phoneNumber,
+            'access_token' => $access_token,
+            'status' => true,
+        ]);
+
+        return [
+            'Message' => 'Payment was received successfully',
+            'transaction' => $transaction
+        ];
+    }
+
     
     /**
      *  AIRTEL MONEY
@@ -72,23 +105,5 @@ class PaymentController extends Controller
 
 
 
-    public function processPayment(Request $request) {
-
-        $request->validate([
-
-        ]);
-
-        $data = [
-            'Amount' => $request->amount,
-            'Fuel amount' => $request->fuelAmount,
-            'Fue Type' => $request->fuelName,
-            'User' => $request->user,
-            'Phonenumber' => $request->phoneNumber
-        ];
-
-        return [
-            'data' => $data,
-            'message' => 'Request received successfully'
-        ];
-    }
+    
 }

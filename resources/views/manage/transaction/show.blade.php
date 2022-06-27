@@ -14,21 +14,6 @@
 
                 <div class="rounded-lg bg-white p-5 w-full sm:w-1/2">
 
-                    <div class="flex flex-row items-center justify-between px-5 mb-3">
-
-                        <div>
-                            <h2>
-                                Serial No.
-                            </h2>
-                        </div>
-
-                        <div>
-                            <h2>
-                                00001
-                            </h2>
-                        </div>
-
-                    </div>
 
                     <div class="flex flex-row items-center justify-between px-5 mb-3">
 
@@ -40,7 +25,7 @@
 
                         <div>
                             <h2>
-                                2/2/2022
+                                {{ $transaction->created_at->diffForHumans()}}
                             </h2>
                         </div>
 
@@ -56,7 +41,7 @@
 
                         <div>
                             <h2>
-                                John Doe
+                                {{ $transaction->user->name}}
                             </h2>
                         </div>
 
@@ -74,7 +59,7 @@
 
                         <div>
                             <h2>
-                                Petrol
+                                {{ $transaction->fuel->name}}
                             </h2>
                         </div>
 
@@ -91,7 +76,7 @@
 
                         <div>
                             <h2>
-                                2,994/=
+                                {{ $transaction->price }}
                             </h2>
                         </div>
 
@@ -109,11 +94,45 @@
 
                         <div>
                             <h2>
-                                10
+                                {{ $transaction->litres}}
                             </h2>
                         </div>
 
                     </div>
+
+                    <div class="flex flex-row items-center justify-between px-5 mb-3">
+
+                        <div>
+                            <h2>
+                                Payment
+                            </h2>
+                        </div>
+
+                        <div>
+                            <h2>
+                                {{ $transaction->cash_paid}}
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-row items-center justify-between px-5 mb-3">
+
+                        <div>
+                            <h2>
+                                Access Token
+                            </h2>
+                        </div>
+
+                        <div>
+                            <h2>
+                                {{ $transaction->access_token}}
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    
 
                     <div class="flex flex-row items-center justify-between px-5 mb-3">
 
@@ -125,7 +144,18 @@
 
                         <div>
                             <h2>
-                                <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Confirmed</span>
+
+                                @if ($transaction->status)
+                                    <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Confirmed</span>
+                                @elseif ($transaction->status == false)
+                                    <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Cancelled</span>
+                                @elseif($transaction->status == Null)
+                                    <span class="text-xs bg-yellow-600 p-1 rounded-lg text-black bg-opacity-50">processing</span>
+                                @endif
+
+
+
+                                {{-- <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Confirmed</span> --}}
                             </h2>
                         </div>
 
