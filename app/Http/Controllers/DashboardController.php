@@ -16,8 +16,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $petrol = Fuel::where('name', 'petrol')->first();
-        $diesel = Fuel::where('name', 'diesel')->first();
+        $petrol = Fuel::where('name', 'diesel')->first();
+        $diesel = Fuel::where('name', 'petrol')->first();
 
         if($request->user()->hasRole('admin')) {
             $transactions = Transaction::orderBy('created_at', 'desc')->get();
