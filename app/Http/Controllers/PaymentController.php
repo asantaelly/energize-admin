@@ -22,7 +22,7 @@ class PaymentController extends Controller
 
 
         // Generate access token
-        $access_token = random_int(1111, 9999);
+        $access_token = random_int(1000, 9999);
 
         // store transactions details
         $transaction = Transaction::create([
