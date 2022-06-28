@@ -19,7 +19,7 @@
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $petrol ? $petrol->price : '3,000' }}/=</span></div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $petrol ? $petrol->price : '' }}/=</span></div>
 
                         @if ($petrol)
                             @if ($petrol->status == TRUE)
@@ -51,7 +51,7 @@
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
-                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $diesel ?  $diesel->price : '2,700' }}/=</span></div>
+                        <div class="text-sm text-slate-400 font-500">Price per Litre <span class="text-lg font-black"> TZS {{ $diesel ?  $diesel->price : '' }}/=</span></div>
                     
                         @if ($diesel)  
                             @if ($diesel->status == TRUE)
