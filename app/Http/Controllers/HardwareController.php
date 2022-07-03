@@ -22,7 +22,7 @@ class HardwareController extends Controller
             if($transaction == NULL || $transaction->status == FALSE)
             {
                 return [
-                    'Error' => 'Invalid access token!'
+                    'error' => 'E'
                 ];
             }
 
