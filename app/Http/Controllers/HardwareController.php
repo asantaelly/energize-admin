@@ -12,6 +12,9 @@ class HardwareController extends Controller
 
     public function getAccessCode(Request $request)
     {
+
+        return $request->code;
+
         $validated = $request->validate([
             'code' => ['required'],
             'status' => ['required'],
@@ -45,7 +48,7 @@ class HardwareController extends Controller
                     'transaction' => $transaction,
                 ];
             }
-        }
+    }
         
 
             
