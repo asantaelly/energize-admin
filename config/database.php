@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Str;
 
-    $db = parse_url(getenv("DATABASE_URL"));
-    $host = $db["host"];
-    $port = $db["port"];
-    $username = $db["user"];
-    $password = $db["pass"];
-    $database = ltrim($db["path"], "/");
-
-
-
-
-
 return [
 
     /*
@@ -26,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,29 +63,14 @@ return [
             ]) : [],
         ],
 
-        // 'pgsql' => [
-        //     'driver' => 'pgsql',
-        //     'url' => env('DATABASE_URL'),
-        //     'host' => env('DB_HOST', '127.0.0.1'),
-        //     'port' => env('DB_PORT', '5432'),
-        //     'database' => env('DB_DATABASE', 'forge'),
-        //     'username' => env('DB_USERNAME', 'forge'),
-        //     'password' => env('DB_PASSWORD', ''),
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'prefix_indexes' => true,
-        //     'search_path' => 'public',
-        //     'sslmode' => 'prefer',
-        // ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => $host,
-            'port' => $port,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
