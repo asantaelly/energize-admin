@@ -8,6 +8,7 @@ use App\Http\PaymentGateway\VodacomMpesa;
 use App\Models\Fuel;
 use App\Models\User;
 use App\Models\Transaction;
+use Carbon\Carbon;
 
 
 
@@ -15,23 +16,62 @@ use App\Models\Transaction;
 class PaymentController extends Controller
 {
 
-    public function processPayment(Request $request) {
+   
+     /**
+     *  Vodacom MPESA
+     * 
+     *  Get payment USSDPush request and process it.
+     *  
+     */
+    public function getUSSDPush(Request $request)
+    {
+        $user = User::find($request->user['id']);
+        $fuel = Fuel::find($request->fuel['id']);
 
-        $user = User::find($request->user['user']['id']);
-        $fuel = Fuel::find($request->data['fuel']['id']);
+        $validated = $request->validate([
+            'phoneNumber' => ['required'],
+            'amount' => ['required'],
+            'fuelAmount' => ['required'],
+        ]);
+
+        $validPhoneNumber = (int) '255'.substr($validated['phoneNumber'], 1);
+        $fuelAmount = round($validated['fuelAmount'], 2);
+
+        // Generate Unique transaction ID
+        // $date = Carbon::now();
+        // $uniqueTransactionID =  md5(uniqid(rand(), true)).$date->format('YmdHis');
+        $uniqueTransactionID =  md5(uniqid(rand(), true));
 
 
         // Generate access token
         $access_token = random_int(1000, 9999);
+
+        // Payment Description
+        $paymentDescription = (string) round($fuelAmount, 0)." Litres of ".ucfirst($fuel->name);
+
+        $data = [
+            'msisdn' =>  $validPhoneNumber,
+            'amount' => $validated['amount'],
+            'serviceProviderCode' => '000000',
+            'transaction_ID' => $uniqueTransactionID,
+            'reference' => 'T12344CA',
+            'paymentDescription' => $paymentDescription,
+        ];
+
+        $response = (new VodacomMpesa)->authenticate()->USSDPush($data);
+
+        if($response->failed() || $response->clientError() || $response->serverError()){
+            $response->throw();
+        }
 
         // store transactions details
         $transaction = Transaction::create([
             'user_id' => $user->id,
             'fuel_id' => $fuel->id,
             'price' => $fuel->price,
-            'cash_paid' => $request->data['amount'],
-            'litres' => round($request->data['fuelAmount'], 2),
-            'phone_number' => $request->phoneNumber,
+            'cash_paid' => $validated['amount'],
+            'litres' => $fuelAmount,
+            'phone_number' =>  $validPhoneNumber,
             'access_token' => $access_token,
             'status' => true,
         ]);
@@ -42,8 +82,8 @@ class PaymentController extends Controller
         ];
     }
 
-    
-    /**
+
+     /**
      *  AIRTEL MONEY
      * 
      *  Get payment USSDPush request and process it.
@@ -67,43 +107,7 @@ class PaymentController extends Controller
         $response = (new AirtelMoney)->authenticate()->USSDPush($data);
 
         return $response;
-
     }
-
-
-     /**
-     *  Vodacom MPESA
-     * 
-     *  Get payment USSDPush request and process it.
-     *  
-     */
-    public function getUSSDPush(Request $request)
-    {
-
-        $validated = $request->validate([
-            'msisdn' => ['required'],
-            'amount' => ['required'],
-            'serviceProviderCode' => ['required'],
-            'transaction_ID' => ['required'],
-            'reference' => ['required'],
-            'paymentDescription' => ['required', 'string', 'max:255']
-        ]);
-
-        $data = [
-            'msisdn' => $validated['msisdn'],
-            'amount' => $validated['amount'],
-            'serviceProviderCode' => $validated['serviceProviderCode'],
-            'transaction_ID' => $validated['transaction_ID'],
-            'reference' => $validated['reference'],
-            'paymentDescription' => $validated['paymentDescription'],
-        ];
-
-        $response = (new VodacomMpesa)->authenticate()->USSDPush($data);
-        
-        return $response;
-    }
-
-
 
     
 }

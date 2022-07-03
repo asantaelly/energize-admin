@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::put('/fuel/{id}', [FuelController::class, 'update']);
     Route::get('/fuel/get/{name}', [FuelController::class, 'getFuel']);
 
+    // Pay through MPESA
     Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
 
 
@@ -36,7 +37,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
 
 // payment gateway testing
-Route::post('/payment', [PaymentController::class, 'processPayment']);
+// Route::post('/payment', [PaymentController::class, 'processPayment']);
+// Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

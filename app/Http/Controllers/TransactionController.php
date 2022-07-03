@@ -17,9 +17,9 @@ class TransactionController extends Controller
     {
 
         if($request->user()->hasRole('admin')) {
-            $transactions = Transaction::all();
+            $transactions = Transaction::orderBy('created_at', 'desc')->get();
         } else {
-            $transactions = Transaction::where('user_id', $request->user()->id)->get();
+            $transactions = Transaction::where('user_id', $request->user()->id)->orderBy('created_at', 'desc')->get();
         }
 
         return view('manage.transaction.index', ['transactions' => $transactions]);
