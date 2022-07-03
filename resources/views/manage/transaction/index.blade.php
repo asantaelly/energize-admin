@@ -48,11 +48,11 @@
                                         <td class="p-3 text-sm text-gray-700">{{ $transaction->access_token}}</td>
                                         <td class="p-3 text-sm text-gray-700">
                                             @if ($transaction->status)
-                                                <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Confirmed</span>
+                                                <span class="text-xs bg-green-600 p-1 rounded-lg text-black bg-opacity-50">Active</span>
                                             @elseif ($transaction->status == false)
-                                                <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Cancelled</span>
+                                                <span class="text-xs bg-gray-600 p-1 rounded-lg text-black bg-opacity-50">Inactive</span>
                                             @elseif($transaction->status == Null)
-                                                <span class="text-xs bg-yellow-600 p-1 rounded-lg text-black bg-opacity-50">processing</span>
+                                                <span class="text-xs bg-yellow-600 p-1 rounded-lg text-black bg-opacity-50">Processing</span>
                                             @endif
                                         </td>
                                     </tr>
