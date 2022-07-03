@@ -13,14 +13,13 @@ class HardwareController extends Controller
     public function getAccessCode(Request $request)
     {
         $validated = $request->validate([
-            'code' => ['required', 'min:4'],
+            'code' => ['required'],
             'status' => ['required'],
         ]);
 
         $transaction = Transaction::where('access_token', $validated['code'])->first();
 
-        if($validated['status'] == 'active')
-        {
+       
             if($transaction == NULL || $transaction->status == FALSE)
             {
                 return [
@@ -28,37 +27,27 @@ class HardwareController extends Controller
                 ];
             }
 
-            $data = [
-                'fuel' => $transaction->litres,
-                'type' => $transaction->fuel->name,
-                'name' => $transaction->user->name,
-            ];
+            if($validated['status'] == 'active') {
 
-            return $data;
-
-        }
-        elseif( $validated['status'] == 'inactive')
-        {
-
-            if($transaction == NULL || $transaction->status == FALSE)
-            {
                 return [
-                    'Error' => 'Invalid access token!'
+                    'fuel' => $transaction->litres,
+                    'type' => $transaction->fuel->name,
+                    'name' => $transaction->user->name,
+                ];
+
+            } elseif($validated['status'] == 'inactive') {
+
+                $transaction->status = FALSE;
+                $transaction->save();
+
+                return [
+                    'message' => 'Updated',
+                    'transaction' => $transaction,
                 ];
             }
-
-            $transaction->status = FALSE;
-            $transaction->save();
-
-            return [
-                'message' => 'Updated',
-                'transaction' => $transaction,
-            ];
-        } else {
-            return [
-                'Error' => 'Invalid access token!'
-            ];
         }
+        
 
-    }
+            
+
 }
