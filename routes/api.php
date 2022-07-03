@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FuelController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\Auth\API\UserController;
 
 /*
@@ -36,10 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function() {
 });
 
 
-// payment gateway testing
-// Route::post('/payment', [PaymentController::class, 'processPayment']);
-// Route::post('/pay', [PaymentController::class, 'getUSSDPush']);
-
+// Hardware gateway testing
+Route::post('/getAccessCode', [HardwareController::class, 'getAccessCode']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
