@@ -12,16 +12,12 @@ class HardwareController extends Controller
 
     public function getAccessCode(Request $request)
     {
-
-        return $request->code;
-
         $validated = $request->validate([
             'code' => ['required'],
             'status' => ['required'],
         ]);
 
         $transaction = Transaction::where('access_token', $validated['code'])->first();
-
        
             if($transaction == NULL || $transaction->status == FALSE)
             {
