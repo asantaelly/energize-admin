@@ -13,7 +13,7 @@
 
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
-                            <a class="hover:text-orange-500" href="#">
+                            <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $petrol])}}">
                                  {{ $petrol ? ucfirst($petrol->name) : 'Petrol'}}
                             </a>
                         </h1>
@@ -46,8 +46,12 @@
 
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
+
+                            <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $diesel])}}">
+                                {{ $diesel ? ucfirst($diesel->name) : 'Diesel'}} 
+                           </a>
                             
-                             {{ $diesel ? ucfirst($diesel->name) : 'Diesel'}} 
+                             
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">

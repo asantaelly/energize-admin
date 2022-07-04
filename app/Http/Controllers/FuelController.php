@@ -43,7 +43,9 @@ class FuelController extends Controller
 
     public function getFuel($name) {
 
-        $fuel = Fuel::where('name', $name)->first();
+        $trimmedName = strtolower($name);
+
+        $fuel = Fuel::where('name', $trimmedName)->first();
 
         if(!$fuel) {
             return response(['errors' => ["message" => ["Request resource can not be located, Contact Admin!"]]], 422);
@@ -79,7 +81,7 @@ class FuelController extends Controller
         ]);
 
         $fuel = Fuel::create([
-            'name' => $validated['name'],
+            'name' => strtolower($validated['name']),
             'price' => $validated['price'],
             'total_litres' => $validated['total_litres'],
             'status' => $validated['status'],
@@ -144,7 +146,15 @@ class FuelController extends Controller
         $validated = $this->validateInput($request);
 
         $fuel = Fuel::find($id);
-        $fuel->name = $validated['name'];
+
+        if($fuel->name == 'diesel') {
+            $validated['name'] = 'diesel';
+        } 
+        elseif($fuel->name == 'petrol' ){
+            $validated['name'] = 'petrol';
+        }
+
+        $fuel->name = strtolower($validated['name']);
         $fuel->price = $validated['price'];
         $fuel->total_litres = $validated['total_litres'];
         $fuel->status = $validated['status'];
