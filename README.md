@@ -72,9 +72,6 @@ Currently this project has no tests
 
 Currently this system is hosted at http://smart-station.herokuapp.com
 
-## Authors
-
-* **Wilbroad Assey**
 
 ## License
 
