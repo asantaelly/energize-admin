@@ -1,4 +1,6 @@
 ## Smart Fuel Filling Station - Administration
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 
 This is a web application for smart fuel filling station mobile app, where all the adminstration work will be done.
 
