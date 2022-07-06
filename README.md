@@ -1,8 +1,8 @@
-# Smart Fuel Filling Station
+## Smart Fuel Filling Station - Administration
 
 This is a web application for smart fuel filling station mobile app, where all the adminstration work will be done.
 
-## Getting Started
+### Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
