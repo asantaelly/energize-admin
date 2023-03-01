@@ -52,7 +52,10 @@ class UserController extends Controller
 
         // Check password
         if(!$user || !Hash::check($validated['password'], $user->password)) {
-            return response(['errors' => ["message" => ["Email address or Password is invalid!"]]], 422);
+            return response(["message" => "Email address or Password is invalid!"], 422);
+            // return [
+            //     "message" => "Email address or Password is invalid!"
+            // ];
         }
 
         $token = $user->createToken('APP_TOKEN')->plainTextToken;

@@ -13,9 +13,13 @@
 
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
-                            <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $petrol])}}">
-                                 {{ $petrol ? ucfirst($petrol->name) : 'Petrol'}}
-                            </a>
+                            @if($petrol)
+                                <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $petrol])}}">
+                                    {{ ucfirst($petrol->name) }}
+                                </a>
+                            @else
+                                Petrol
+                            @endif
                         </h1>
                     </div>
                     <div class="flex flex-column items-center justify-between">
@@ -46,11 +50,13 @@
 
                     <div class="flex">
                         <h1 class="text-lg text-white font-black">
-
-                            <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $diesel])}}">
-                                {{ $diesel ? ucfirst($diesel->name) : 'Diesel'}} 
-                           </a>
-                            
+                            @if($diesel)
+                                <a class="hover:text-orange-500" href="{{ route('fuel.show', ['fuel' => $diesel])}}">
+                                    {{ ucfirst($diesel->name) }}
+                                </a>
+                            @else
+                                Diesel
+                            @endif
                              
                         </h1>
                     </div>
@@ -60,16 +66,16 @@
                         @if ($diesel)  
                             @if ($diesel->status == TRUE)
                                 <div class="flex bg-yellow-300 h-10 w-20 items-center justify-center rounded-lg">
-                                    <h4 class="text-sm px-2">available</h4>
+                                    <h4 class="text-sm p-3">available</h4>
                                 </div>
                             @else
                                 <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
-                                    <h4 class="text-sm px-2">Unavailable</h4>
+                                    <h4 class="text-sm p-3">Unavailable</h4>
                                 </div>
                             @endif
                         @else
                             <div class="flex bg-gray-300 h-10 w-20 items-center justify-center rounded-lg">
-                                <h4 class="text-sm px-2">Unavailable</h4>
+                                <h4 class="text-sm p-3">Unavailable</h4>
                             </div>
                         @endif
                             
